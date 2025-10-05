@@ -11,7 +11,7 @@
 }
 
 *{box-sizing:border-box}
-html,body{height:100%}
+html,body{height:100%;overflow-x:hidden}
 body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -21,6 +21,8 @@ body{
 }
 
 #app{min-height:100%;display:flex;align-items:center;justify-content:center;padding:20px}
+body.game-active{overflow:hidden}
+body.game-active #app{padding:0}
 
 .screen{display:none;max-width:1100px;width:100%}
 .screen.active{display:block}
@@ -32,6 +34,7 @@ body{
   padding:22px;
   box-shadow:0 10px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
 }
+.panel.compact{padding:12px;border-radius:12px;margin:6px 0}
 
 .game-title{font-family:"Russo One", Inter, sans-serif;letter-spacing:1px;margin:0 0 12px;font-size:42px;background:linear-gradient(90deg,#fff,#81e6d9);-webkit-background-clip:text;background-clip:text;color:transparent;}
 
@@ -46,10 +49,23 @@ input[type="text"],input[type="number"],input[type="color"]{
   padding:10px 12px;
   outline:none;
 }
+select{
+  flex:1;
+  background:#0f1526;
+  color:var(--text);
+  border:1px solid #273056;
+  border-radius:10px;
+  padding:10px 12px;
+  outline:none;
+}
 
 .grid.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
 .subpanel{background:#0e1424;border:1px solid #222b4a;border-radius:12px;padding:12px}
 .subpanel h3{margin:4px 0 10px;font-weight:700;color:#cfe0ff}
+.levels{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:8px}
+.level-btn{background:#121a33;border:1px solid #2a355c;color:#dbe7ff;border-radius:10px;padding:8px 0;text-align:center;cursor:pointer}
+.level-btn.locked{opacity:.5;cursor:not-allowed}
+.level-btn.current{border-color:#3ddc97;box-shadow:0 0 0 2px #3ddc9733}
 
 .car-select,.avatar-select{display:flex;flex-wrap:wrap;gap:8px}
 .car-option,.avatar-option{
@@ -68,7 +84,7 @@ input[type="text"],input[type="number"],input[type="color"]{
 .list li{margin:3px 0;color:#c7d6ff}
 
 /* Game screen */
-#game-screen{display:grid;grid-template-rows:auto 1fr auto;gap:12px;min-height:100svh;width:100vw;padding:10px;padding-left:calc(10px + env(safe-area-inset-left));padding-right:calc(10px + env(safe-area-inset-right));padding-top:calc(10px + env(safe-area-inset-top));padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+#game-screen{display:grid;grid-template-rows:auto 1fr auto;gap:12px;min-height:100svh;width:100%;padding:0}
 
 #hud{display:flex;align-items:center;justify-content:space-between;background:#0c1324;border:1px solid #1e2747;border-radius:12px;padding:10px;position:sticky;top:0;z-index:3}
 .chip{background:#0f1731;border:1px solid #273058;border-radius:999px;padding:6px 10px}
@@ -77,7 +93,7 @@ input[type="text"],input[type="number"],input[type="color"]{
 .stat{color:#d7e3ff}
 
 #game-wrap{display:grid;place-items:center;align-items:stretch;position:relative}
-#game{width:100vw;height:calc(100svh - 180px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:none;background:var(--road);border-radius:12px;border:1px solid #222b4a;box-shadow:0 10px 40px rgba(0,0,0,0.45);}
+#game{width:100%;height:calc(100svh - var(--hudH, 160px) - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:none;background:var(--road);border-radius:12px;border:1px solid #222b4a;box-shadow:0 10px 40px rgba(0,0,0,0.45);}
 
 #touch-controls{display:none;gap:12px;align-items:center;justify-content:center;position:absolute;left:0;right:0;bottom:calc(10px + env(safe-area-inset-bottom));padding:6px}
 #touch-controls .vertical{display:flex;flex-direction:column;gap:12px}
@@ -88,11 +104,23 @@ input[type="text"],input[type="number"],input[type="color"]{
 /* Over screen */
 #over-screen .earned{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 
+/* Toasts */
+#toastContainer{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{pointer-events:auto;background:#0b1328;border:1px solid #2a3a63;color:#e6f0ff;padding:10px 12px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.35)}
+.toast .title{font-weight:700}
+
 /* Responsive */
 @media (max-width: 900px){
   .grid.two{grid-template-columns:1fr}
   label{width:64px}
   #game{border-radius:0;border-left:none;border-right:none}
+}
+
+/* Start screen tidy */
+#start-screen .panel{max-width:720px;margin:0 auto}
+@media (max-width: 480px){
+  .panel{padding:16px;border-radius:12px}
+  .game-title{font-size:34px}
 }
 
 @media (hover:none), (pointer:coarse){
