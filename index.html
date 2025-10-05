@@ -15,7 +15,7 @@
     <section id="start-screen" class="screen active">
       <div class="panel">
         <h1 class="game-title">SPEED RAYS</h1>
-        <form id="player-form" autocomplete="on">
+        <form id="player-form" autocomplete="on" novalidate>
           <div class="field-row">
             <label for="playerName">Name</label>
             <input id="playerName" name="playerName" type="text" placeholder="Your name" maxlength="18" required>
@@ -23,6 +23,19 @@
           <div class="field-row">
             <label for="playerAge">Age</label>
             <input id="playerAge" name="playerAge" type="number" min="3" max="120" placeholder="18" required>
+          </div>
+
+          <div class="field-row">
+            <label for="gameMode">Mode</label>
+            <select id="gameMode" name="gameMode">
+              <option value="race" selected>Race</option>
+              <option value="parking">Parking</option>
+            </select>
+          </div>
+
+          <div class="subpanel">
+            <h3>Select Level</h3>
+            <div id="levelGrid" class="levels"></div>
           </div>
 
           <div class="grid two">
@@ -70,6 +83,7 @@
           <div id="hudBadges" class="badges"></div>
         </div>
         <div class="hud-right">
+          <div class="stat">Level: <span id="level">1</span></div>
           <div class="stat">Score: <span id="score">0</span></div>
           <div class="stat">Speed: <span id="speed">0</span></div>
           <div class="stat">Time: <span id="time">0</span>s</div>
@@ -106,6 +120,9 @@
       </div>
     </section>
   </div>
+
+  <!-- Toast Notifications -->
+  <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
   <script src="script.js" defer></script>
 </body>
