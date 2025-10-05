@@ -1,0 +1,103 @@
+:root{
+  --bg:#0b0f1a;
+  --panel:#121829;
+  --text:#e6ecff;
+  --muted:#9fb0d8;
+  --primary:#3ddc97;
+  --accent:#ff3344;
+  --road:#1a1f2e;
+  --lane:#cbd5ff22;
+  --badge:#ffd166;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:radial-gradient(1200px 800px at 10% -10%, #1c2541 0%, #0b0f1a 60%),
+             radial-gradient(1200px 800px at 90% 110%, #0f1729 0%, #0b0f1a 60%);
+}
+
+#app{min-height:100%;display:flex;align-items:center;justify-content:center;padding:20px}
+
+.screen{display:none;max-width:1100px;width:100%}
+.screen.active{display:block}
+
+.panel{
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.15));
+  border:1px solid #2a3352;
+  border-radius:16px;
+  padding:22px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.game-title{font-family:"Russo One", Inter, sans-serif;letter-spacing:1px;margin:0 0 12px;font-size:42px;background:linear-gradient(90deg,#fff,#81e6d9);-webkit-background-clip:text;background-clip:text;color:transparent;}
+
+form .field-row{display:flex;gap:10px;align-items:center;margin:10px 0}
+label{width:72px;color:var(--muted)}
+input[type="text"],input[type="number"],input[type="color"]{
+  flex:1;
+  background:#0f1526;
+  color:var(--text);
+  border:1px solid #273056;
+  border-radius:10px;
+  padding:10px 12px;
+  outline:none;
+}
+
+.grid.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+.subpanel{background:#0e1424;border:1px solid #222b4a;border-radius:12px;padding:12px}
+.subpanel h3{margin:4px 0 10px;font-weight:700;color:#cfe0ff}
+
+.car-select,.avatar-select{display:flex;flex-wrap:wrap;gap:8px}
+.car-option,.avatar-option{
+  background:#121a33;border:1px solid #2a355c;color:#dbe7ff;
+  border-radius:999px;padding:8px 12px;cursor:pointer
+}
+.car-option[aria-pressed="true"],.avatar-option[aria-pressed="true"]{border-color:var(--primary);box-shadow:0 0 0 2px #3ddc9733}
+
+.actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+.btn{background:#10172a;border:1px solid #2a355c;color:#e9f1ff;border-radius:12px;padding:10px 14px;cursor:pointer}
+.btn.primary{background:linear-gradient(180deg,#36dca2,#1aa179);border-color:#1aa179;color:#042018}
+.btn:active{transform:translateY(1px)}
+
+.highscores{margin-top:14px}
+.list{margin:0;padding-left:18px}
+.list li{margin:3px 0;color:#c7d6ff}
+
+/* Game screen */
+#game-screen{display:grid;grid-template-rows:auto 1fr auto;gap:12px;min-height:100svh;width:100vw;padding:10px;padding-left:calc(10px + env(safe-area-inset-left));padding-right:calc(10px + env(safe-area-inset-right));padding-top:calc(10px + env(safe-area-inset-top));padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+
+#hud{display:flex;align-items:center;justify-content:space-between;background:#0c1324;border:1px solid #1e2747;border-radius:12px;padding:10px;position:sticky;top:0;z-index:3}
+.chip{background:#0f1731;border:1px solid #273058;border-radius:999px;padding:6px 10px}
+.badges{display:flex;gap:6px;flex-wrap:wrap}
+.badge{background:linear-gradient(180deg,#ffe08a,#ffb703);color:#3a2500;border-radius:999px;padding:4px 8px;border:1px solid #d69e2e;font-weight:700}
+.stat{color:#d7e3ff}
+
+#game-wrap{display:grid;place-items:center;align-items:stretch;position:relative}
+#game{width:100vw;height:calc(100svh - 180px - env(safe-area-inset-top) - env(safe-area-inset-bottom));max-height:none;background:var(--road);border-radius:12px;border:1px solid #222b4a;box-shadow:0 10px 40px rgba(0,0,0,0.45);}
+
+#touch-controls{display:none;gap:12px;align-items:center;justify-content:center;position:absolute;left:0;right:0;bottom:calc(10px + env(safe-area-inset-bottom));padding:6px}
+#touch-controls .vertical{display:flex;flex-direction:column;gap:12px}
+.ctrl{width:64px;height:64px;border-radius:14px;border:1px solid #2a355c;background:#0e1424;color:#cfe0ff;font-size:22px;backdrop-filter:blur(4px);background-color:#0e1424cc}
+
+.tip{opacity:.7;text-align:center}
+
+/* Over screen */
+#over-screen .earned{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+
+/* Responsive */
+@media (max-width: 900px){
+  .grid.two{grid-template-columns:1fr}
+  label{width:64px}
+  #game{border-radius:0;border-left:none;border-right:none}
+}
+
+@media (hover:none), (pointer:coarse){
+  #touch-controls{display:flex}
+  .ctrl{width:76px;height:76px;font-size:26px}
+}
+
+
