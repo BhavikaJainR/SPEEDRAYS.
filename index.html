@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>SPEED RAYS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Start / Login & Customization Screen -->
+    <section id="start-screen" class="screen active">
+      <div class="panel">
+        <h1 class="game-title">SPEED RAYS</h1>
+        <form id="player-form" autocomplete="on">
+          <div class="field-row">
+            <label for="playerName">Name</label>
+            <input id="playerName" name="playerName" type="text" placeholder="Your name" maxlength="18" required>
+          </div>
+          <div class="field-row">
+            <label for="playerAge">Age</label>
+            <input id="playerAge" name="playerAge" type="number" min="3" max="120" placeholder="18" required>
+          </div>
+
+          <div class="grid two">
+            <div class="subpanel">
+              <h3>Choose Car</h3>
+              <div class="car-select" id="carSelect">
+                <button type="button" class="car-option" data-car="sport" aria-pressed="true">Sport</button>
+                <button type="button" class="car-option" data-car="muscle">Muscle</button>
+                <button type="button" class="car-option" data-car="retro">Retro</button>
+              </div>
+              <h3>Car Color</h3>
+              <input type="color" id="carColor" value="#ff3344" aria-label="Car color picker">
+            </div>
+
+            <div class="subpanel">
+              <h3>Player Image/Emoji</h3>
+              <div class="avatar-select" id="avatarSelect">
+                <button type="button" class="avatar-option" data-avatar="😎" aria-pressed="true">😎</button>
+                <button type="button" class="avatar-option" data-avatar="🚗">🚗</button>
+                <button type="button" class="avatar-option" data-avatar="🏎️">🏎️</button>
+                <button type="button" class="avatar-option" data-avatar="🔥">🔥</button>
+                <button type="button" class="avatar-option" data-avatar="👾">👾</button>
+              </div>
+              <input id="avatarCustom" type="text" maxlength="2" placeholder="Or type emoji" aria-label="Custom emoji">
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="startBtn" class="btn primary" type="submit">Start Race</button>
+          </div>
+        </form>
+
+        <div class="highscores">
+          <h3>High Scores</h3>
+          <ol id="highscoreList" class="list"></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Game Screen -->
+    <section id="game-screen" class="screen">
+      <div id="hud">
+        <div class="hud-left">
+          <div id="hudPlayer" class="chip"></div>
+          <div id="hudBadges" class="badges"></div>
+        </div>
+        <div class="hud-right">
+          <div class="stat">Score: <span id="score">0</span></div>
+          <div class="stat">Speed: <span id="speed">0</span></div>
+          <div class="stat">Time: <span id="time">0</span>s</div>
+        </div>
+      </div>
+
+      <div id="game-wrap">
+        <canvas id="game" width="420" height="740" aria-label="SPEED RAYS game canvas" role="img"></canvas>
+
+        <!-- On-screen touch controls for mobile -->
+        <div id="touch-controls">
+          <button class="ctrl" data-action="left" aria-label="Move left">⟵</button>
+          <div class="vertical">
+            <button class="ctrl" data-action="up" aria-label="Speed up">⟰</button>
+            <button class="ctrl" data-action="down" aria-label="Slow down">⟱</button>
+          </div>
+          <button class="ctrl" data-action="right" aria-label="Move right">⟶</button>
+        </div>
+      </div>
+
+      <div id="pause-tip" class="tip">Press P or tap with two fingers to pause</div>
+    </section>
+
+    <!-- Game Over Screen -->
+    <section id="over-screen" class="screen">
+      <div class="panel">
+        <h2>Game Over</h2>
+        <p class="lead">Final Score: <span id="finalScore">0</span></p>
+        <div id="earnedRewards" class="earned"></div>
+        <div class="actions">
+          <button id="restartBtn" class="btn primary">Race Again</button>
+          <button id="homeBtn" class="btn">Home</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
+
+
